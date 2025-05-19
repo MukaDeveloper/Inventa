@@ -1,12 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { IEventRouter } from '../../domain/interfaces/event-router.interface';
-import { EEventType } from 'src/domain/enumerators/event-type.enum';
+import { EEventType } from '../../domain/enumerators/event-type.enum';
+import { InjectionTokens } from '../tokens/injection-tokens';
+import { ReceiveEventDTO } from '../../domain/models/receive-event.dto';
 
 @Injectable()
 export class HandleEventUseCase {
-  constructor(private readonly eventRouter: IEventRouter) {}
+  constructor(@Inject(InjectionTokens.EventRouter) private readonly router: IEventRouter) {}
 
-  async execute(type: EEventType, payload: any): Promise<void> {
-    await this.eventRouter.route({ type, payload });
+  async execute(data: ReceiveEventDTO): Promise<void> {
+	/**
+	 * TODO: Implementar lógica de validação de payload
+	 * TODO: Implementar lógica de validação de tipo de evento
+	 * 
+	 * TODO: Interpretar evento e inserir o payload no formato correto na fila
+	 * TODO: Fazer um serviço que consome a fila e processa o evento
+	 */
+    await this.router.route(data);
   }
 }

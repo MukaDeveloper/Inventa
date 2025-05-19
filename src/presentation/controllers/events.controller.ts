@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { HandleEventUseCase } from 'src/application/use-cases/handle-event.usecase';
-import { ReceiveEventDTO } from 'src/domain/models/receive-event.dto';
+import { HandleEventUseCase } from '../../application/use-cases/handle-event.usecase';
+import { ReceiveEventDTO } from '../../domain/models/receive-event.dto';
 
 @Controller('events')
 export class EventsController {
@@ -10,7 +10,7 @@ export class EventsController {
   async receiveEvent(
     @Body() body: ReceiveEventDTO,
   ): Promise<{ status: string }> {
-    await this.handleEvent.execute(body.type, body.payload);
+    await this.handleEvent.execute(body);
     return { status: 'ok' };
   }
 }

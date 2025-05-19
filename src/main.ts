@@ -16,11 +16,10 @@ async function bootstrap() {
   app.useGlobalFilters(new ApiExceptionFilter());
 
   const port = process.env.PORT || 3000;
-  const server = await app.listen(port);
-
+  
   // Verifica se está rodando local ou em produção
   const isProd = process.env.NODE_ENV === 'production';
-  await app.listen(process.env.PORT ?? 3000);
+  const server = await app.listen(port);
 
   Logger.log('Server is listening on: ', server.address());
 }

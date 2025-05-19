@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { HandleEventUseCase } from "./use-cases/handle-event.usecase";
-import { DefaultEventRouter } from "src/infrastructure/router/default-event.router";
+import { DefaultEventRouter } from "../infrastructure/router/default-event.router";
 
 @Module({
 	imports: [],
