@@ -6,7 +6,7 @@
 
 A API recebe eventos via `POST /events`, contendo:
 
-- `type`: tipo do evento (ex: `user.created`, `order.placed`)
+- `type`: tipo do evento (ex: `health-check`, `cron`, `payment`)
 - `payload`: dados dinâmicos relacionados ao evento
 
 Cada evento é roteado internamente para o caso de uso apropriado com base no tipo. O processamento pode ser imediato ou agendado em uma fila simulada.
@@ -41,19 +41,24 @@ docker-compose up -d
 ```
 
 > Isso iniciará:
+>
 > - `Postgres` em `localhost:5432`
 > - `PgAdmin` em `http://localhost:5050`
 
 Acesso PgAdmin:
+
 - **Email**: `admin@example.com`
 - **Senha**: `admin`
 
 ## 🛠️ Instalação do projeto
 
+> Processo completo
 ```bash
-git clone https://github.com/seuusuario/muka-inventa.git
+git clone https://github.com/MukaDeveloper/Inventa.git
 cd muka-inventa
 npm install
+cp .env.example .env
+docker-compose up -d
 npm run start:dev
 ```
 
@@ -63,10 +68,11 @@ npm run start:dev
 
 ```json
 {
-  "type": "user.created",
+  "type": "health-check",
   "payload": {
     "id": "123",
-    "name": "João"
+    "name": "Samuel",
+    "joinedAt": "Mon May 19 2025 09:28:12 GMT-0300"
   }
 }
 ```

@@ -1,3 +1,5 @@
+import { ReceiveEventDTO } from '../models/receive-event.dto';
+
 export interface IEventRouter {
-  route(event: { type: string; payload: any }): Promise<void>;
+  route(event: ReceiveEventDTO): Promise<void>;
 }
