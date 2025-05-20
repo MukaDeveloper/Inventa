@@ -42,8 +42,9 @@ docker-compose up -d
 
 > Isso iniciará:
 >
-> - `Postgres` em `localhost:5432`
+> - `Postgres` em `http://localhost:5432`
 > - `PgAdmin` em `http://localhost:5050`
+> - `Redis` em `http://localhost:6379`
 
 Acesso PgAdmin:
 

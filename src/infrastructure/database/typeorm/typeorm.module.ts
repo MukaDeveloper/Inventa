@@ -7,21 +7,18 @@ const synchronize = env.NODE_ENV !== 'production';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: () => ({
-        type: 'postgres',
-        host: env.DB_HOST || 'localhost',
-        port: parseInt(process.env.DB_PORT || '5432', 10),
-        username: env.DB_USER,
-        password: env.DB_PASSWORD,
-        database: env.DB_NAME,
-        autoLoadEntities: true,
-        synchronize,
-      }),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      synchronize,
     }),
   ],
   providers: [],
   exports: [],
 })
-export class InternalTypeOrmModule {}
+export class DatabaseTypeOrmModule {}

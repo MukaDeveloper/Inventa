@@ -7,26 +7,30 @@ export class DefaultEventRouter implements IEventRouter {
   private readonly logger = new Logger(DefaultEventRouter.name);
 
   async route(event: { type: EEventType; payload: any }): Promise<void> {
-	console.log('-----------------------------------------------------------')
+    console.log('-----------------------------------------------------------');
     console.log(`Roteando evento do tipo ${event.type}`);
     console.log(`Descrição: '${event.payload.description ?? 'Sem descrição'}'`);
-	console.log('-----------------------------------------------------------')
+    console.log('-----------------------------------------------------------');
 
+    const prefix = `[${new Date().toLocaleString('pt-BR')}] >>`;
     switch (event.type) {
       case EEventType.HEALT_CHECK:
-		console.log(`[${new Date().toLocaleString('pt-BR')}] >> Health Check`);
+        console.log(`${prefix} Health Check`);
         // TODO: Implementar lógica de fila em memória ou redis
         break;
 
       case EEventType.PAYMENT:
+        console.log(`${prefix} Payment`);
         // TODO: Implementar lógica de fila em memória ou redis
         break;
 
       case EEventType.DISCORD:
+        console.log(`${prefix} Discord`);
         // TODO: Implementar lógica de fila em memória ou redis
         break;
 
       case EEventType.LANDING_PAGE:
+        console.log(`${prefix} Landing Page`);
         // TODO: Implementar lógica de fila em memória ou redis
         break;
 
