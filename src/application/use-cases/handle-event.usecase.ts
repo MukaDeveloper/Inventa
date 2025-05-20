@@ -3,10 +3,11 @@ import { IEventRouter } from '../../domain/interfaces/event-router.interface';
 import { EEventType } from '../../domain/enumerators/event-type.enum';
 import { InjectionTokens } from '../tokens/injection-tokens';
 import { ReceiveEventDTO } from '../../domain/models/receive-event.dto';
+import { RedisQueueService } from '../../infrastructure/queue/redis-queue.service';
 
 @Injectable()
 export class HandleEventUseCase {
-  constructor(@Inject(InjectionTokens.EventRouter) private readonly router: IEventRouter) {}
+  constructor(private readonly redisQueue: RedisQueueService) {}
 
   async execute(data: ReceiveEventDTO): Promise<void> {
 	/**
@@ -16,6 +17,6 @@ export class HandleEventUseCase {
 	 * TODO: Interpretar evento e inserir o payload no formato correto na fila
 	 * TODO: Fazer um serviço que consome a fila e processa o evento
 	 */
-    await this.router.route(data);
+	this.redisQueue.enqueue(data);
   }
 }
